@@ -1,0 +1,65 @@
+name: emp
+
+services:
+  laravel:
+    image: emp-prod:1.0.0
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: laravel
+    ports: 
+      - 80:80
+    volumes:
+      - ./.env:/var/www/html/.env
+      - ./storage/logs:/var/www/html/storage/logs
+    depends_on: 
+      - mysql
+      - redis
+    networks:
+      laravel:
+        ipv4_address: 172.16.0.12
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+  mysql:
+    image: mysql/mysql-server:8.0
+    container_name: mysql
+    environment: 
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_HOST=172.16.0.12
+    ports: 
+      - 3306:3306
+    volumes: 
+      - mysql-data-prod:/var/lib/mysql
+    networks:
+      laravel:
+        ipv4_address: 172.16.0.10
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+  redis:
+    image: redis:7.0.10-alpine3.17
+    container_name: redis
+    ports: 
+      - 6379:6379
+    volumes: 
+      - redis-data-prod:/data
+    networks:
+      laravel:
+        ipv4_address: 172.16.0.11
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+volumes:
+  mysql-data-prod: 
+  redis-data-prod:
+
+networks:
+  laravel:
+    ipam:
+      config:
+        - subnet: 172.16.0.0/24
