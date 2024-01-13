@@ -15,7 +15,7 @@ services:
       - redis
 
   node:
-    image: node:gallium-alpine3.17
+    image: node:alpine3.19
     container_name: node
     working_dir: /home/node/app
     ports:

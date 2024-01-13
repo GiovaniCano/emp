@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'home');
+
+Route::view('admin/{any}', 'vue')->where('any', '.*');
+
+Route::fallback(fn() => abort(404));
