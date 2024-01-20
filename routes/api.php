@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\PassController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,9 +17,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('admin')->group(function() {
-    
+    Route::get('user', fn() => response()->json(['user' => auth()->user()]))->name('admin.user');
+
+    Route::middleware('guest')->group(function() {
+        Route::post('login', [UserController::class, 'login'])->name('login');
+    });
 
     Route::middleware('auth')->group(function() {
-
+        Route::post('logout', [UserController::class, 'logout'])->name('logout');
+        Route::apiResource('pass', PassController::class);
     });
 });

@@ -7,6 +7,9 @@
     
     @if (isset($vue) && $vue === true)
         @vite(['resources/scss/app.scss', 'resources/vue/app.js'])
+        @auth
+            @routes
+        @endauth
     @else
         @vite(['resources/scss/app.scss', 'resources/js/app.js'])
     @endif

@@ -1,1 +1,1 @@
-@extends('app', ['vue' => true])
+@extends('app', ['vue' => true, 'is_auth' => auth()->check()])

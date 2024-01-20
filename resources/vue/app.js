@@ -1,10 +1,13 @@
-console.log('vue');
 import '../js/bootstrap';
 
 import { createApp } from 'vue';
 import App from './App.vue'
 import router from './router'
+import userService from './services/userService'
 
-const app = createApp(App)
-app.use(router)
-app.mount('#app')
+userService.getCurrentUser()
+    .then(() => {
+        const app = createApp(App)
+        app.use(router)
+        app.mount('#app')
+    })
