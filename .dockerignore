@@ -22,7 +22,3 @@ vite.config.js
 README.md
 
 diagrams
-
-lang/vendor/adminlte/*
-!lang/vendor/adminlte/en
-!lang/vendor/adminlte/es
