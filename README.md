@@ -19,11 +19,13 @@ The app facilitates event organization by allowing admins to configure event det
     - [tightenco/ziggy](https://github.com/tighten/ziggy)
     - [spatie/flysystem-dropbox](https://github.com/spatie/flysystem-dropbox)
 - NPM:
-    - Vue 3 (composition api)
-    - Vue-router
-    - SASS
-    - Axios
+    - [Vue 3 (composition api)](https://vuejs.org/guide/introduction.html)
+    - [Vue-router](https://router.vuejs.org/)
+    - [SASS](https://sass-lang.com/)
+    - [Axios](https://axios-http.com/docs/intro)
+    - [Datatables](https://datatables.net/manual/vue)
 - Other:
+    - [Fontawesome icons](https://fontawesome.com/)
     - [CKEditor5](https://ckeditor.com/)
 
 ## Dropbox

@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('admin')->group(function() {
-    Route::get('user', fn() => response()->json(['user' => auth()->user()]))->name('admin.user');
+    Route::get('auth-user', [UserController::class, 'authUser'])->name('admin.auth-user');
 
     Route::middleware('guest')->group(function() {
         Route::post('login', [UserController::class, 'login'])->name('login');
@@ -25,6 +25,11 @@ Route::prefix('admin')->group(function() {
 
     Route::middleware('auth')->group(function() {
         Route::post('logout', [UserController::class, 'logout'])->name('logout');
-        Route::apiResource('pass', PassController::class);
+
+        Route::apiResource('user', UserController::class)->middleware('role:super admin');
+        Route::apiResource('pass', PassController::class)->middleware('permission:manage site');
     });
 });
+
+// role:super admin|admin|writer
+// permission:edit settings|manage site|scan tickets|edit articles
