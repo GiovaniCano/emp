@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { getUserPermissionsNames, getUserRolesNames } from './helpers';
 import userService from './services/userService';
-import login from './views/auth/login.vue';
-import adminIndex from './views/superadmin/index.vue';
-import passIndex from './views/pass/index.vue';
-import articleIndex from './views/article/index.vue';
+
+const login = () => import('./views/auth/login.vue');
+const adminIndex = () => import('./views/superadmin/index.vue');
+const passIndex = () => import('./views/pass/index.vue');
+const articleIndex = () => import('./views/article/index.vue');
 const notFound = () => import('./views/404.vue')
 
 const routes = [
@@ -35,7 +36,7 @@ const routes = [
                 name: 'article.index',
                 meta: { auth: true, permissions: ['edit articles'] },
             },
-            { path: '/:pathMatch(.*)*', name: '404', component: notFound },
+            { path: '/:pathMatch(.*)*', name: '404', component: notFound, },
         ]
     }
 ]
