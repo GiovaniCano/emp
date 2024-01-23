@@ -18,7 +18,7 @@ class _DatabaseSeeder_prod extends Seeder
 
         $super_admin_user = User::factory()->create([
             'name' => 'Superadmin',
-            'email' => 'a@a.com',
+            'email' => '',
         ]);
 
         $super_admin_user->assignRole('super admin');

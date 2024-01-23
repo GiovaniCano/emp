@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\PassController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -26,8 +27,9 @@ Route::prefix('admin')->group(function() {
     Route::middleware('auth')->group(function() {
         Route::post('logout', [UserController::class, 'logout'])->name('logout');
 
-        Route::apiResource('user', UserController::class)->middleware('role:super admin');
+        Route::apiResource('user', UserController::class)->except('show')->middleware('role:super admin');
         Route::apiResource('pass', PassController::class)->middleware('permission:manage site');
+        Route::apiResource('article', ArticleController::class)->middleware('permission:edit articles');
     });
 });
 

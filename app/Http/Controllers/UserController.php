@@ -6,7 +6,7 @@ use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -29,9 +29,11 @@ class UserController extends Controller
             'password' => ['required'],
         ]);
  
-        if (Auth::attempt($credentials)) {
+        if (Auth::attemptWhen($credentials, fn(User $user) => $user->hasAnyRole(Role::all()) )) {
             $request->session()->regenerate();
-            return response()->json(['user' => auth()->user()]);
+            $user = auth()->user();
+            $user->load('roles.permissions');
+            return response()->json(compact('user'));
         }
  
         return response()->json([

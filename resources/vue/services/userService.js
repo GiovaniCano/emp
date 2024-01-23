@@ -1,27 +1,37 @@
 import axios from "axios";
 import router from '../router'
 import { reactive } from "vue";
+import { getUserHome } from '../helpers'
 
 export default reactive({
     user: null,
+    home: null,
     
     login(credentials) {
         axios.post('/api/admin/login', {
             email: credentials.email,
             password: credentials.password
         })
-        .then(() => router.push({name:'pass.index'}).then(() => router.go(0)) )
+        .then(({data}) => {
+            this.user = data.user
+            this.home = getUserHome(this.user)
+            const homeRoute = router.getRoutes().find(({name}) => name === this.home)
+            window.location.href = homeRoute.path
+        })
     },
     logout() {
         axios.post(route('logout'))
-        .then(() => router.push({name:'login'}).then(() => router.go(0)) )
+            .then(() => {
+                // this.user = null
+                // this.home = null
+                window.location.href = '/admin/login'
+            })
     },
     getCurrentUser() {
         return axios.get('/api/admin/auth-user')
             .then(({data}) => {
-                const user = data.user
-                if(!user) router.push({name:'login'})
-                this.user = user
+                this.user = data.user
+                if(this.user) this.home = getUserHome(this.user)
             })
     },
 

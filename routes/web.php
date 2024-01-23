@@ -17,4 +17,5 @@ Route::view('/', 'home')->name('home');
 
 Route::view('admin/{any}', 'vue')->where('any', '.*')->name('vue');
 
-Route::fallback(fn() => abort(404));
+Route::get('404', fn() => abort(404))->name('404');
+Route::fallback(fn() => to_route('404'));
