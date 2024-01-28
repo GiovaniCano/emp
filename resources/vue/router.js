@@ -80,6 +80,6 @@ router.beforeEach((to, from, next) => {
 })
 
 // role:super admin|admin|writer
-// permission:edit settings|manage site|scan tickets|edit articles
+// permission:manage site|scan tickets|edit articles
 
 export default router

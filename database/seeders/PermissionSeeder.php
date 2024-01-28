@@ -15,10 +15,8 @@ class PermissionSeeder extends Seeder
     public function run(): void
     {
         // permissions
-        $edit_settings = Permission::create(['name' => 'edit settings']);
         $manage_site = Permission::create(['name' => 'manage site']);
         $scan_tickets = Permission::create(['name' => 'scan tickets']);
-
         $edit_articles = Permission::create(['name' => 'edit articles']);
 
         // roles
@@ -27,8 +25,8 @@ class PermissionSeeder extends Seeder
         $writer = Role::create(['name' => 'writer']);
 
         // assign permissions
-        $super_admin->syncPermissions([$edit_settings, $manage_site, $scan_tickets, $edit_articles]);
-        $admin->syncPermissions([$edit_settings, $manage_site, $scan_tickets, $edit_articles]);
+        $super_admin->syncPermissions([$manage_site, $scan_tickets, $edit_articles]);
+        $admin->syncPermissions([$manage_site, $scan_tickets, $edit_articles]);
         $writer->givePermissionTo($edit_articles);
     }
 }

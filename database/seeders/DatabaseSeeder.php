@@ -15,8 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(ArticleSeeder::class);
-        $this->call(SettingSeeder::class);
-        $this->call(SocialSeeder::class);
         $this->call(SpeakerSeeder::class);
         $this->call(PassTicketSeeder::class);
         $this->call(SponsorSeeder::class);
