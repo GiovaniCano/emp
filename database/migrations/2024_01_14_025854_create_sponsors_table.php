@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('sponsors', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('sponsorship_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
+            // $table->foreignId('sponsorship_id')->constrained()->cascadeOnUpdate()->restrictOnDelete();
             $table->string('name');
             $table->string('image')->unique()->nullable();
             $table->string('email');
             $table->string('phone');
             $table->string('company');
-            $table->decimal('amount', 9, 2, true)->nullable();
+            // $table->decimal('amount', 9, 2, true)->nullable();
 
             $table->timestamps();
         });

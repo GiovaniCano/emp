@@ -10,8 +10,4 @@ class Sponsor extends Model
     use HasFactory;
 
     protected $guarded = [];
-
-    public function sponsorship() {
-        return $this->belongsTo(Sponsorship::class);
-    }
 }
